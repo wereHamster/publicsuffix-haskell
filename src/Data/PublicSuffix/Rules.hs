@@ -12,7 +12,7 @@ that long, so running exhaustive tests on the full list is feasible.
 
 -}
 
-module Data.PublicSuffix.Rules where
+module Data.PublicSuffix.Rules (Rule(..), rules) where
 
 import Data.PublicSuffix.Types
 import Data.PublicSuffix.TH

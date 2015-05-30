@@ -1,8 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Data.PublicSuffix
-    ( Rule(..)
-    , publicSuffix
+    ( publicSuffix
     , registeredDomain
     ) where
 
