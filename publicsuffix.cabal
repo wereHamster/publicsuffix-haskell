@@ -56,7 +56,4 @@ test-suite spec
    , publicsuffix
 
    , text
-
-   , smallcheck
    , hspec
-   , hspec-smallcheck
