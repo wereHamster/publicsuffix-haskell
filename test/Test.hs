@@ -14,6 +14,8 @@ import           Data.PublicSuffix.Rules
 
 import           Test.Hspec
 
+import           Prelude
+
 
 main :: IO ()
 main = hspec spec

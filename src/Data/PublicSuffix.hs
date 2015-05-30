@@ -10,9 +10,12 @@ import qualified Data.Text as T
 
 import           Data.Function
 import           Data.List
+import           Data.Monoid
 
 import           Data.PublicSuffix.Types
 import           Data.PublicSuffix.Rules
+
+import           Prelude
 
 
 
