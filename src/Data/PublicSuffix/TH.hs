@@ -51,7 +51,10 @@ mkRules funName filePath = do
     rules <- runIO $ readRulesFile filePath
     rulesE <- mapM genRule rules
 
-    return [ FunD (mkName funName) [Clause [] (NormalB $ ListE $ rulesE) []] ]
+    return
+        [ SigD (mkName "rules") (AppT ListT (ConT ''Rule))
+        , FunD (mkName funName) [Clause [] (NormalB $ ListE $ rulesE) []]
+        ]
 
   where
     genRule :: Rule -> ExpQ
