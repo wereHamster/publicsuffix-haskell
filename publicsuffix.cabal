@@ -5,6 +5,10 @@ synopsis:            The publicsuffix list exposed as proper Haskell types
 description:
     This package contains a parsed representation of the publicsuffix list,
     and functions which you can use to query it.
+    .
+    The package version follows the template @\<api version\>.\<date\>@ where
+    @date@ is when the publicsuffix list was last updated from upstream, in the
+    format @YYYYMMDD@.
 
 homepage:            https://github.com/wereHamster/publicsuffix-haskell/
 
