@@ -38,7 +38,7 @@ library
   ghc-options:         -Wall
 
   build-depends:
-     base >=4.6 && <4.9
+     base >=4 && <4.9
    , filepath
    , template-haskell
    , bytestring
@@ -61,7 +61,7 @@ test-suite spec
   main-is:             Test.hs
 
   build-depends:
-     base >=4.6 && <4.9
+     base >=4 && <4.9
    , publicsuffix
 
    , text
