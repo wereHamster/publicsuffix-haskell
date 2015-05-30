@@ -8,11 +8,9 @@ import           Control.Applicative
 import qualified Data.ByteString            as BS
 import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as T
-import qualified Data.Traversable           as Traversable (forM)
 import           Data.PublicSuffix.Types
 
 import           Language.Haskell.TH
-import qualified Language.Haskell.TH.Quote  as Quasi
 import qualified Language.Haskell.TH.Syntax as TH
 
 import           System.FilePath            (dropFileName)
@@ -40,7 +38,7 @@ parseRules body =
     parseRule line = case T.uncons line of
         Nothing -> error "parseRule: unexpected empty line"
         Just ('!', rest) -> Rule { isException = True,  ruleLabels = T.split (=='.') rest }
-        Just (_  , rest) -> Rule { isException = False, ruleLabels = T.split (=='.') line }
+        Just (_  , _   ) -> Rule { isException = False, ruleLabels = T.split (=='.') line }
 
 
 moduleDirectory :: Q Exp

@@ -2,8 +2,6 @@
 
 module Main where
 
-import           Control.Monad
-
 import           Data.List
 import qualified Data.Text as T
 import           Data.Foldable
