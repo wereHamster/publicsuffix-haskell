@@ -3,17 +3,21 @@
 
 module Data.PublicSuffix.TH where
 
+import           Control.Applicative
+
 import qualified Data.ByteString            as BS
 import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as T
 import qualified Data.Traversable           as Traversable (forM)
+import           Data.PublicSuffix.Types
+
 import           Language.Haskell.TH
 import qualified Language.Haskell.TH.Quote  as Quasi
 import qualified Language.Haskell.TH.Syntax as TH
+
 import           System.FilePath            (dropFileName)
 
-import           Data.PublicSuffix.Types
-
+import           Prelude
 
 readRulesFile :: FilePath -> IO [Rule]
 readRulesFile inputFile = do
