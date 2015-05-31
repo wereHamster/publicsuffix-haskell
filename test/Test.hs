@@ -37,7 +37,7 @@ spec = parallel $ do
         it "should return the correct suffix when given an registered domain" $ do
             forM_ regularRules $ \rule -> do
                 let suffix = mconcat $ intersperse "." $ reverse $ ruleLabels rule
-                publicSuffix ("x99b016dd9783a7c49a." <> suffix) `shouldBe` suffix
+                publicSuffix ("x99b016dd9783a7c49a." ++ suffix) `shouldBe` suffix
 
 
     describe "registeredDomain" $ do
@@ -54,12 +54,12 @@ spec = parallel $ do
         it "should return the domain when given an registered domain" $ do
             forM_ regularRules $ \rule -> do
                 let suffix = mconcat $ intersperse "." $ reverse $ ruleLabels rule
-                let domain = "x99b016dd9783a7c49a." <> suffix
+                let domain = "x99b016dd9783a7c49a." ++ suffix
                 registeredDomain domain `shouldBe` (Just domain)
 
         it "should return the registered domain when given a subdomain of a registered domain" $ do
             forM_ regularRules $ \rule -> do
                 let suffix    = mconcat $ intersperse "." $ reverse $ ruleLabels rule
-                let domain    = "x99b016dd9783a7c49a." <> suffix
-                let subDomain = "sub." <> domain
+                let domain    = "x99b016dd9783a7c49a." ++ suffix
+                let subDomain = "sub." ++ domain
                 registeredDomain subDomain `shouldBe` (Just domain)

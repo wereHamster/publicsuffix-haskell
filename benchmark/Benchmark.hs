@@ -5,7 +5,6 @@ module Main where
 
 import           Control.Monad
 
-import           Data.Monoid
 import           Data.List
 import           Data.PublicSuffix
 import           Data.PublicSuffix.Rules
@@ -22,6 +21,6 @@ main = do
         [ bench "publicSuffix" $ nfIO $ do
             idx <- getStdRandom $ randomR (0, length rules - 1)
             let rule = rules !! idx
-            let domain = "foo." <> (mconcat $ intersperse "." $ reverse $ ruleLabels rule)
+            let domain = "foo." ++ (mconcat $ intersperse "." $ reverse $ ruleLabels rule)
             void $ return $ publicSuffix domain
         ]
