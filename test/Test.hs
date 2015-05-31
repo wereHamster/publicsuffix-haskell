@@ -3,7 +3,6 @@
 module Main where
 
 import           Data.List
-import qualified Data.Text as T
 import           Data.Foldable
 import           Data.Monoid
 

@@ -3,11 +3,10 @@
 
 module Data.PublicSuffix.TH where
 
+
 import           Control.Applicative
 
-import qualified Data.ByteString            as BS
-import qualified Data.Text                  as T
-import qualified Data.Text.Encoding         as T
+import           Data.Char
 import           Data.PublicSuffix.Types
 
 import           Language.Haskell.TH
@@ -17,28 +16,41 @@ import           System.FilePath            (dropFileName)
 
 import           Prelude
 
+
+
 readRulesFile :: FilePath -> IO [Rule]
 readRulesFile inputFile = do
-    body <- BS.readFile inputFile
+    body <- readFile inputFile
     return $ parseRules body
 
+isComment :: String -> Bool
+isComment ('/':'/':_) = True
+isComment _           = False
 
-parseRules :: BS.ByteString -> [Rule]
+stripStart :: String -> String
+stripStart = dropWhile isSpace
+
+splitDot :: String -> [String]
+splitDot [] = [""]
+splitDot x  =
+    let (y, z) = break (== '.') x in
+    y : (if z == "" then [] else splitDot $ drop 1 z)
+
+parseRules :: String -> [Rule]
 parseRules body =
     map parseRule $
     filter ruleLine $
-    map T.stripStart $ -- Each line is only read up to the first whitespace.
-    T.lines $ -- The Public Suffix List consists of a series of lines, separated by \n.
-    T.decodeUtf8 body
+    map stripStart $ -- Each line is only read up to the first whitespace.
+    lines body -- The Public Suffix List consists of a series of lines, separated by \n.
 
   where
-    ruleLine line = not $ T.isPrefixOf "//" line || T.null line
+    ruleLine line = not $ isComment line || null line
 
-    parseRule :: T.Text -> Rule
-    parseRule line = case T.uncons line of
-        Nothing -> error "parseRule: unexpected empty line"
-        Just ('!', rest) -> Rule { isException = True,  ruleLabels = T.split (=='.') rest }
-        Just (_  , _   ) -> Rule { isException = False, ruleLabels = T.split (=='.') line }
+    parseRule :: String -> Rule
+    parseRule line = case line of
+        []       -> error "parseRule: unexpected empty line"
+        '!':rest -> Rule { isException = True,  ruleLabels = splitDot rest }
+        _        -> Rule { isException = False, ruleLabels = splitDot line }
 
 
 moduleDirectory :: Q Exp
@@ -62,10 +74,9 @@ mkRules funName filePath = do
         ruleE     <- [| Rule |]
         trueE     <- [| True |]
         falseE    <- [| False |]
-        textPackE <- [| T.pack |]
 
         return $ foldl1 AppE
             [ ruleE
             , if isException rule then trueE else falseE
-            , ListE $ reverse $ map (\x -> AppE textPackE $ LitE $ StringL x) (map T.unpack $ ruleLabels rule)
+            , ListE $ reverse $ map (\x -> LitE $ StringL x) (ruleLabels rule)
             ]

@@ -1,10 +1,12 @@
-
 module Data.PublicSuffix.Types where
-
-import Data.Text
-
 
 data Rule = Rule
     { isException :: !Bool
-    , ruleLabels  :: ![Text]
+      -- ^ Whether this rule is an exception or not.
+
+    , ruleLabels  :: ![String]
+      -- ^ The domain labels in reversed order, ie:
+      --
+      --   > "test.example.com" => ["com", "example", "test"]
+
     } deriving (Show)
