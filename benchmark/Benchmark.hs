@@ -5,6 +5,7 @@ module Main where
 
 import           Control.Monad
 
+import           Data.Monoid
 import           Data.List
 import           Data.PublicSuffix
 import           Data.PublicSuffix.Rules
@@ -12,6 +13,8 @@ import           Data.PublicSuffix.Rules
 import           System.Random
 
 import           Criterion.Main
+
+import           Prelude
 
 
 
