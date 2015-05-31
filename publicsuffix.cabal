@@ -41,7 +41,6 @@ library
      base >=4 && <4.9
    , filepath
    , template-haskell
-   , bytestring
 
   exposed-modules:
      Data.PublicSuffix
