@@ -27,9 +27,6 @@ isComment :: String -> Bool
 isComment ('/':'/':_) = True
 isComment _           = False
 
-stripStart :: String -> String
-stripStart = dropWhile isSpace
-
 splitDot :: String -> [String]
 splitDot [] = [""]
 splitDot x  =
@@ -40,7 +37,7 @@ parseRules :: String -> [Rule]
 parseRules body =
     map parseRule $
     filter ruleLine $
-    map stripStart $ -- Each line is only read up to the first whitespace.
+    map (takeWhile (not . isSpace)) $ -- Each line is only read up to the first whitespace.
     lines body -- The Public Suffix List consists of a series of lines, separated by \n.
 
   where
