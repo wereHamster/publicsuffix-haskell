@@ -35,15 +35,13 @@ toLabels x =
 --    and continuing for all labels in the rule, one finds that for every pair,
 --    either they are identical, or that the label from the rule is "*".
 
-matchRule :: String -> Rule -> Bool
-matchRule domain rule =
+matchRule :: [String] -> Rule -> Bool
+matchRule domainLabels rule =
     domainLabelsLength >= ruleLabelsLength &&
-    all labelMatches (zip (ruleLabels rule) (reverse domainLabels))
+    all labelMatches (zip (ruleLabels rule) domainLabels)
 
   where
     ruleLabelsLength   = length $ ruleLabels rule
-
-    domainLabels       = toLabels domain
     domainLabelsLength = length domainLabels
 
 
@@ -84,16 +82,16 @@ publicSuffix domain =
     --   The public suffix is the set of labels from the domain which match the labels of the prevailing rule, using the matching algorithm above.
     --   The registered or registrable domain is the public suffix plus one additional label.
 
-    mconcat $ intersperse "." $ reverse $ take numMatchingLabels $ reverse domainLabels
+    mconcat $ intersperse "." $ reverse $ take numMatchingLabels domainLabels
 
   where
-    rule              = prevailingRule domain
-    domainLabels      = toLabels domain
-    numMatchingLabels = length $ takeWhile labelMatches $ zip (ruleLabels rule) (reverse domainLabels)
+    rule              = prevailingRule domainLabels
+    domainLabels      = reverse $ toLabels domain
+    numMatchingLabels = length $ takeWhile labelMatches $ zip (ruleLabels rule) domainLabels
 
 
-prevailingRule :: String -> Rule
-prevailingRule domain = case filter (matchRule domain) rules of
+prevailingRule :: [String] -> Rule
+prevailingRule domainLabels = case filter (matchRule domainLabels) rules of
     []  -> Rule False ["*"]
     [x] -> x
     xs  -> case filter isException xs of
@@ -109,9 +107,9 @@ prevailingRule domain = case filter (matchRule domain) rules of
 registeredDomain :: String -> Maybe String
 registeredDomain domain = if domain == suffix
     then Nothing
-    else Just $ mconcat $ intersperse "." $ reverse $ take (suffixLabelsLength + 1) $ reverse domainLabels
+    else Just $ mconcat $ intersperse "." $ reverse $ take (suffixLabelsLength + 1) domainLabels
 
   where
     suffix             = publicSuffix domain
     suffixLabelsLength = length $ toLabels suffix
-    domainLabels       = toLabels domain
+    domainLabels       = reverse $ toLabels domain
