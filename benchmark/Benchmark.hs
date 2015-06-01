@@ -3,27 +3,15 @@
 module Main where
 
 
-import           Control.Monad
-
-import           Data.Monoid
-import           Data.List
-import           Data.PublicSuffix
-import           Data.PublicSuffix.Rules
-
-import           System.Random
-
-import           Criterion.Main
-
-import           Prelude
+import Data.PublicSuffix
+import Criterion.Main
 
 
 
 main :: IO ()
 main = do
     defaultMain
-        [ bench "publicSuffix" $ nfIO $ do
-            idx <- getStdRandom $ randomR (0, length rules - 1)
-            let rule = rules !! idx
-            let domain = "foo." ++ (mconcat $ intersperse "." $ reverse $ ruleLabels rule)
-            void $ return $ publicSuffix domain
+        [ bgroup "publicSuffix" $ map (\d -> bench d $ nf publicSuffix d)
+            [ "ac", "zurich", "dontexist"
+            ]
         ]
