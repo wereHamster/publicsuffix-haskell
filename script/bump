@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -e
+. "$(git --exec-path)/git-sh-setup"
+
+
+OLDVERSION="$(grep -i ^version *.cabal | awk '{ print $2 }')"
+MAJOR="$(echo $OLDVERSION | cut -f1 -d.)"
+NEWVERSION="$MAJOR.$(date +%Y%m%d)"
+
+
+
+# Check if the version doesn't already exist. Also refuse to bump the list
+# when there are any other changes in the working tree.
+
+if git rev-parse --quiet --verify v$NEWVERSION >/dev/null; then
+    die "*** Tag v$NEWVERSION already exists!"
+fi
+
+require_clean_work_tree "bump" "Please commit or stash them."
+
+
+
+echo "*** Bump to v$NEWVERSION"
+echo "*** Fetching the latest public suffix list..."
+
+curl -sL -o src/Data/PublicSuffix/public_suffix_list.dat \
+    https://publicsuffix.org/list/public_suffix_list.dat
+
+
+if git diff-files --quiet; then
+    echo "*** No changes in the public suffix list."
+    exit 0
+fi
+
+
+echo "*** Running tests..."
+# rm -rf dist/
+cabal install --only-dependencies
+cabal test
+
+
+cat publicsuffix.cabal | sed "s/$OLDVERSION/$NEWVERSION/" > publicsuffix.cabal.new
+mv publicsuffix.cabal.new publicsuffix.cabal
+
+git add publicsuffix.cabal src/Data/PublicSuffix/public_suffix_list.dat
+
+
+echo "*** Press any key to commit and tag the changes"
+read OK
+
+git commit -m "Bump"
+git tag -a -s -m v$NEWVERSION v$NEWVERSION
+
+cabal check
+cabal sdist
+
+echo "*** Uploading to GitHub and Hackage"
+git push origin HEAD v$NEWVERSION
+cabal upload dist/publicsuffix-$NEWVERSION.tar.gz
