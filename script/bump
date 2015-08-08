@@ -1,6 +1,8 @@
 #!/bin/sh
-
 set -e
+cd "$(dirname "$0")/.."
+
+
 . "$(git --exec-path)/git-sh-setup"
 
 
@@ -35,8 +37,7 @@ fi
 
 
 echo "*** Running tests..."
-# rm -rf dist/
-cabal install --only-dependencies
+script/bootstrap
 cabal test
 
 
