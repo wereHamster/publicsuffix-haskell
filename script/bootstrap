@@ -8,3 +8,4 @@ curl -sLO https://www.stackage.org/nightly/cabal.config
 cabal update
 cabal sandbox init
 cabal install --only-dependencies --enable-test --enable-benchmark
+cabal configure --enable-test --enable-benchmark
