@@ -38,7 +38,7 @@ fi
 
 echo "*** Running tests..."
 script/bootstrap
-cabal test
+stack test
 
 
 cat publicsuffix.cabal | sed "s/$OLDVERSION/$NEWVERSION/" > publicsuffix.cabal.new
@@ -53,9 +53,6 @@ read OK
 git commit -m "Bump"
 git tag -a -s -m v$NEWVERSION v$NEWVERSION
 
-cabal check
-cabal sdist
-
 echo "*** Uploading to GitHub and Hackage"
 git push origin HEAD v$NEWVERSION
-cabal upload dist/publicsuffix-$NEWVERSION.tar.gz
+stack upload .
