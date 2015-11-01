@@ -1,5 +1,5 @@
 name:                publicsuffix
-version:             0.20151011
+version:             0.20151102
 
 synopsis:            The publicsuffix list exposed as proper Haskell types
 description:
