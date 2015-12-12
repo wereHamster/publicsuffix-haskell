@@ -1148,7 +1148,7 @@ tv.im
 
 // in : http://en.wikipedia.org/wiki/.in
 // see also: https://registry.in/Policies
-// Please note, that nic.in is not an offical eTLD, but used by most
+// Please note, that nic.in is not an official eTLD, but used by most
 // government institutions.
 in
 co.in
@@ -4429,19 +4429,19 @@ mil.ng
 mobi.ng
 
 // ni : http://www.nic.ni/
-com.ni    
-gob.ni    
+com.ni
+gob.ni
 edu.ni
 org.ni
 nom.ni
 net.ni
-mil.ni  
+mil.ni
 co.ni
 biz.ni
-web.ni    
+web.ni
 int.ni
 ac.ni
-in.ni  
+in.ni
 info.ni
 
 // nl : http://en.wikipedia.org/wiki/.nl
@@ -11158,6 +11158,10 @@ pagespeedmobilizer.com
 withgoogle.com
 withyoutube.com
 
+// Hashbang : https://hashbang.sh
+// Hashbang is a non-profit that provides shells and various other services.
+hashbang.sh
+
 // Heroku : https://www.heroku.com/
 // Submitted by Tom Maher <tmaher@heroku.com> 2013-05-02
 herokuapp.com
@@ -11212,6 +11216,10 @@ operaunite.com
 // Submitted by Duarte Santos <domain-admin@outsystemscloud.com> 2014-03-11
 outsystemscloud.com
 
+// Pagefront : https://www.pagefronthq.com/
+// Submitted by Jason Kriss <jason@pagefronthq.com> 2015-12-02
+pagefrontapp.com
+
 // .pl domains (grandfathered)
 art.pl
 gliwice.pl
@@ -11233,6 +11241,11 @@ priv.at
 // Submitted by Daniel Dent (https://www.danieldent.com/) 2015-07-16
 qa2.com
 
+// Rackmaze LLC : https://www.rackmaze.com
+// Submitted by Kirill Pertsev <kika@rackmaze.com> 2015-12-02
+rackmaze.com
+rackmaze.net
+
 // Red Hat, Inc. OpenShift : https://openshift.redhat.com/
 // Submitted by Tim Kramer <tkramer@rhcloud.com> 2012-10-24
 rhcloud.com
@@ -11252,6 +11265,22 @@ pp.ua
 sinaapp.com
 vipsinaapp.com
 1kapp.com
+
+// Synology, Inc. : https://www.synology.com/
+// Submitted by Rony Weng <ronyweng@synology.com> 2015-12-02
+synology.me
+diskstation.me
+i234.me
+myds.me
+dscloud.biz
+dscloud.me
+dscloud.mobi
+dsmynas.com
+dsmynas.net
+dsmynas.org
+familyds.com
+familyds.net
+familyds.org
 
 // TASK geographical domains (www.task.gda.pl/uslugi/dns)
 gda.pl
