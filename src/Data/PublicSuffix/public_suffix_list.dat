@@ -4419,17 +4419,18 @@ info.nf
 other.nf
 store.nf
 
-// ng : http://psg.com/dns/ng/
+// ng : http://www.nira.org.ng/index.php/join-us/register-ng-domain/189-nira-slds
 ng
 com.ng
 edu.ng
+gov.ng
+i.ng
+mil.ng
+mobi.ng
 name.ng
 net.ng
 org.ng
 sch.ng
-gov.ng
-mil.ng
-mobi.ng
 
 // ni : http://www.nic.ni/
 com.ni
@@ -10705,6 +10706,10 @@ cloudcontrolapp.com
 // co.ca : http://registry.co.ca/
 co.ca
 
+// i-registry s.r.o. : http://www.i-registry.cz/
+// Submitted by Martin Semrad <semrad@i-registry.cz>
+co.cz
+
 // CDN77.com : http://www.cdn77.com
 // Submitted by Jan Krpes <jan.krpes@cdn77.com> 2015-07-13
 c.cdn77.org
@@ -11265,6 +11270,10 @@ zakopane.pl
 // Submitted by Gary Dylina <gary@pantheon.io> 2015-09-14
 pantheon.io
 gotpantheon.com
+
+// prgmr.com : https://prgmr.com/
+// Changed by Sarah Newman <owner@prgmr.com>
+xen.prgmr.com
 
 // priv.at : http://www.nic.priv.at/
 // Submitted by registry <lendl@nic.at> 2008-06-09
