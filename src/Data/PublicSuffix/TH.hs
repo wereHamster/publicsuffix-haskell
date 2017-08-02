@@ -1,7 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
 
-module Data.PublicSuffix.TH where
+module Data.PublicSuffix.TH
+    ( moduleDirectory
+    , mkRules
+    ) where
 
 
 import           Control.Applicative
