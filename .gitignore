@@ -3,3 +3,4 @@
 
 /.stack-work/
 /stack.yaml
+/stack.yaml.lock
